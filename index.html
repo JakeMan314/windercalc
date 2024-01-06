@@ -17,6 +17,10 @@
       width: 200px;
       margin-bottom: 10px;
     }
+    select {
+      width: 200px;
+      margin-bottom: 10px;
+    }
     button {
       padding: 8px 16px;
       background-color: #4CAF50;
@@ -37,8 +41,22 @@
   <h1>3 Step Winder Calculator</h1>
   <label for="widthInput">Enter value for Width:</label>
   <input type="text" id="widthInput" placeholder="Enter Width value">
+  <select id="widthFraction">
+    <option value="">Select fraction</option>
+    <option value="1/2">1/2</option>
+    <option value="1/4">1/4</option>
+    <option value="3/4">3/4</option>
+    <!-- Add more fractions as needed -->
+  </select>
   <label for="heightInput">Enter value for Height:</label>
   <input type="text" id="heightInput" placeholder="Enter Height value">
+  <select id="heightFraction">
+    <option value="">Select fraction</option>
+    <option value="1/2">1/2</option>
+    <option value="1/4">1/4</option>
+    <option value="3/4">3/4</option>
+    <!-- Add more fractions as needed -->
+  </select>
   <button onclick="calculate()">Calculate</button>
   <div id="result"></div>
 
@@ -61,10 +79,20 @@
     }
   });
 });
-function calculate() {
+    function calculate() {
       // Fetching input values
       let width = parseFloat(document.getElementById('widthInput').value);
-      const height = parseFloat(document.getElementById('heightInput').value);
+      const widthFraction = document.getElementById('widthFraction').value;
+      let height = parseFloat(document.getElementById('heightInput').value);
+      const heightFraction = document.getElementById('heightFraction').value;
+
+      // If a fraction is selected, adjust the input values
+      if (widthFraction !== "") {
+        width += eval(widthFraction);
+      }
+      if (heightFraction !== "") {
+        height += eval(heightFraction);
+      }
 
       // Subtracting 0.5 from width
       width -= 0.5;
