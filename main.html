@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3 Step Winder Calculator</title>
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"] {
+      width: 200px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result-item {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>3 Step Winder Calculator</h1>
+  <label for="widthInput">Enter value for Width:</label>
+  <input type="text" id="widthInput" placeholder="Enter Width value">
+  <label for="heightInput">Enter value for Height:</label>
+  <input type="text" id="heightInput" placeholder="Enter Height value">
+  <button onclick="calculate()">Calculate</button>
+  <div id="result"></div>
+
+  <script>
+    function calculate() {
+      // Fetching input values
+      let width = parseFloat(document.getElementById('widthInput').value);
+      const height = parseFloat(document.getElementById('heightInput').value);
+
+      // Subtracting 0.5 from width
+      width -= 0.5;
+
+      // Calculating values based on the formula
+      const s1 = width * Math.tan(29 * (Math.PI / 180)); // converting degrees to radians
+      const s3 = height * Math.tan(31 * (Math.PI / 180)); // converting degrees to radians
+
+      // Calculating S2 (Result T) and S2X (Result S)
+      const s2 = height - s1;
+      const s2x = width - s3;
+
+      // Calculating additional values with square roots
+      const twoWSquared = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
+      const threeWSquared = Math.sqrt(Math.pow(height, 2) + Math.pow(s1, 2));
+
+      // Displaying the results
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = `
+        <div class="result-item">W: ${width.toFixed(2)}</div>
+        <div class="result-item">S1: ${s1.toFixed(2)}</div>
+        <div class="result-item">√2W: ${twoWSquared.toFixed(2)}</div>
+        <div class="result-item">S2: ${s2.toFixed(2)}</div>
+        <div class="result-item">S2X: ${s2x.toFixed(2)}</div>
+        <div class="result-item">S3: ${s3.toFixed(2)}</div>
+        <div class="result-item">√3W: ${threeWSquared.toFixed(2)}</div>
+      `;
+    }
+  </script>
+</body>
+</html>
+
