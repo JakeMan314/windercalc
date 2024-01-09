@@ -2,94 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>3 Step Winder Calculator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 50px;
-      background-color: #f4f4f4;
-    }
-    h1 {
-      text-align: center;
-    }
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    label, select, input, button {
-      display: block;
-      width: calc(100% - 6%);
-      margin: 10px auto;
-      padding: 8px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    select, input {
-      width: calc(100% - 22px);
-    }
-    button {
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    .result {
-      margin-top: 20px;
-      border-top: 1px solid #ccc;
-      padding-top: 20px;
-    }
-    .result-item {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-    .checkbox-group {
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      padding-right: 8px;
-    }
-    .checkbox-group div {
-      display: inline-block;
-      margin-right: 10px;
-      padding: 8px;
-      padding-right: 8px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    boxlabel {
-      text-align: center;
-      margin: 10px auto;
-      padding: 5px;
-      font-size: 16px;
-    }
-
-
-  </style>
+  <title>Winder Calculator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Winder Calculator</h1>
   <div class="container">
   <label for="winderType">Winder Type:</label>
     <select id="winderType" onchange="toggleInputs()">
-      <option value="3StepHanger" selected>3 Step Hanger</option>
-      <option value="2StepHanger">2 Step Hanger</option>
+      <option value="2StepHanger" selected>2 Step Hanger</option>
+      <option value="3StepHanger">3 Step Hanger</option>
+      <option value="2StepDOT">2 Step DOT</option>
       <option value="3StepDOT">3 Step DOT</option>
+      <option value="2Step3_5Post">2 Step 3.5 Post</option>
+      <option value="3Step3_5Post">3 Step 3.5 Post</option>
+      <option value="2Step5_5Post">2 Step 5.5 Post</option>
       <option value="3Step5_5Post">3 Step 5.5 Post</option>
-      <option value="3StepWraparound">3 Step Wraparound</option>
       <option value="2StepWraparound">2 Step Wraparound</option>
+      <option value="3StepWraparound">3 Step Wraparound</option>
     </select>
+    <div class="checkbox-container">
+    <input type="checkbox" id="nosingCheckbox" onchange="calculate()">
+    <label class="nosing-label" for="nosingCheckbox">Nosing</label>
+  </div>
   <label for="widthInput">Width:</label>
   <input type="text" id="widthInput" placeholder="Enter Width value" onchange="calculate()">
   <select id="widthFraction" onchange="calculate()">
@@ -156,118 +91,6 @@
   <button onclick="calculate()">Calculate</button>
   <div id="result"></div>
  </div>
-
-  <script>
-  
-    document.addEventListener('DOMContentLoaded', function() {
-  const widthInput = document.getElementById('widthInput');
-  const heightInput = document.getElementById('heightInput');
-
-  widthInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      calculate();
-    }
-  });
-
-  heightInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      calculate();
-    }
-  });
-});
-    
-    function calculate() {
-      // Fetching input values
-      let width = parseFloat(document.getElementById('widthInput').value);
-      const widthFraction = document.getElementById('widthFraction').value;
-      let height = parseFloat(document.getElementById('heightInput').value);
-      const heightFraction = document.getElementById('heightFraction').value;
-
-      // If a fraction is selected, adjust the input values
-      if (widthFraction !== "") {
-        width += eval(widthFraction);
-      }
-      if (heightFraction !== "") {
-        height += eval(heightFraction);
-      }
-
-      // Subtracting 0.5 from width
-      width -= 0.5;
-      // Calculating values based on the formula
-      const s1 = width * Math.tan(29 * (Math.PI / 180)); // converting degrees to radians
-      const s3 = height * Math.tan(31 * (Math.PI / 180)); // converting degrees to radians
-      // Calculating S2 and SX
-      const s2 = height - s1;
-      const sx = width - s3;
-      // Calc Diags with Square Root
-      const w2 = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
-      const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s1, 2));
-
-	  //shift variables
-	  const shiftw = 7 + width;
-	  const shifts1 = 1 + s1;
-
-	  const shiftw2 = 4 + w2;
-	  const shifts2 = 0 + s2;
-	  const shiftsx = sx - 1;
-	  
-	  const shiftw3 = 4 + w3;
-	  const shifts3 = 0.5 + s3;
-	  
-
-// Function to convert decimal to fraction
-function toFraction(decimal) {
-  const whole = Math.floor(decimal);
-  const fraction = decimal - whole;
-
-  if (fraction === 0) {
-    return `${whole}`;
-  }
-
-  const tolerance = 1.0e-6;
-  let h1 = 1;
-  let h2 = 0;
-  let k1 = 0;
-  let k2 = 1;
-  let b = fraction;
-  
-  // Continued fraction approximation
-  do {
-    const a = Math.floor(b);
-    let aux = h1;
-    h1 = a * h1 + h2;
-    h2 = aux;
-    aux = k1;
-    k1 = a * k1 + k2;
-    k2 = aux;
-    b = 1 / (b - a);
-  } while (Math.abs(fraction - h1 / k1) > fraction * tolerance);
-
-  if (whole === 0) {
-    return `<sup>${h1}</sup>&frasl;<sub>${k1}</sub>`;
-  } else {
-    return `${whole} <sup>${h1}</sup>&frasl;<sub>${k1}</sub>`;
-  }
-}
-
-
-  // Round each answer to the nearest quarter and convert to fractions if needed
-  const roundToQuarter = (value) => Math.round(value * 4) / 4;
-
-  // Displaying the results as mixed fractions if applicable
-  const resultElement = document.getElementById('result');
-  resultElement.innerHTML = `
-    <div class="result-item">W: ${toFraction(roundToQuarter(shiftw))}</div>
-    <div class="result-item">S1: ${toFraction(roundToQuarter(shifts1))}</div><br>
-    <div class="result-item">2W: ${toFraction(roundToQuarter(shiftw2))}</div>
-    <div class="result-item">S2: ${toFraction(roundToQuarter(shifts2))}</div>
-    <div class="result-item">SX: ${toFraction(roundToQuarter(shiftsx))}</div><br>
-    <div class="result-item">3W: ${toFraction(roundToQuarter(shiftw3))}</div>
-    <div class="result-item">S3: ${toFraction(roundToQuarter(shifts3))}</div>
-  `;
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
