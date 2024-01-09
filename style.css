@@ -38,7 +38,7 @@ body {
       background-color: #45a049;
     }
     .result {
-      margin-top: 20px;
+      margin-top: 200px;
       border-top: 1px solid #ccc;
       padding-top: 20px;
     }
@@ -68,3 +68,37 @@ body {
       padding: 5px;
       font-size: 16px;
     }
+    .checkbox-container {
+ 	  text-align: center;
+ 	  margin-bottom: 20px; /* Adjust spacing */
+	}
+
+	#nosingCheckbox {
+	  display: none; /* Hide the checkbox */
+	}
+	
+	.nosing-label {
+	  display: inline-block;
+	  padding: 10px 20px;
+	  background-color: #4CAF50;
+	  margin: 0px auto;
+	  margin-bottom: -10px;
+      padding: 8px;
+	  color: white;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  font-size: 16px;
+	  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transition added */
+	}
+	
+	.nosing-label:hover {
+	  background-color: #409443;
+	  color: white;
+	  border-color: #4CAF50; /* Change border color on hover */
+	}
+	
+	#nosingCheckbox:checked + .nosing-label {
+	  background-color: #38813A;
+	  color: white;
+	  border-color: #4CAF50; /* Change border color when checked */
+	}

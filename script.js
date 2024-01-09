@@ -17,12 +17,17 @@
   });
 });
     
+    
+    
+    
+    
     function calculate() {
       // Fetching input values
       let width = parseFloat(document.getElementById('widthInput').value);
       const widthFraction = document.getElementById('widthFraction').value;
       let height = parseFloat(document.getElementById('heightInput').value);
       const heightFraction = document.getElementById('heightFraction').value;
+      const nosing = document.getElementById('nosingCheckbox').checked;
 
       // If a fraction is selected, adjust the input values
       if (widthFraction !== "") {
@@ -31,6 +36,43 @@
       if (heightFraction !== "") {
         height += eval(heightFraction);
       }
+      
+      
+	  const winderType = document.getElementById('winderType').value;
+	  let s1, s3, s2, sx, w2, w3;
+	  
+	  if (winderType === '2StepHanger') {
+	  // Calculate
+      }
+      if (winderType === '3StepHanger') {
+	  // Calculate
+      }
+      if (winderType === '2StepDOT') {
+	  // Calculate
+      }
+      if (winderType === '3StepDOT') {
+	  // Calculate
+      }
+      if (winderType === '2Step3_5Post') {
+	  // Calculate
+      }
+      if (winderType === '3Step3_5Post') {
+	  // Calculate
+      }
+      if (winderType === '2Step5_5Post') {
+	  // Calculate
+      }
+      if (winderType === '2Step5_5Post') {
+	  // Calculate
+      }
+      if (winderType === '2StepWraparound') {
+	  // Calculate
+      }
+      if (winderType === '3StepWraparound') {
+	  // Calculate
+      }
+      
+ 
 
       // Subtracting 0.5 from width
       width -= 0.5;
