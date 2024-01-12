@@ -19,45 +19,230 @@
 });
 
 function calculate() {
-  // Fetching input values
-  let width = parseFloat(document.getElementById('widthInput').value);
-  const widthFraction = document.getElementById('widthFraction').value;
-  let height = parseFloat(document.getElementById('heightInput').value);
-  const heightFraction = document.getElementById('heightFraction').value;
-  const nosing = document.getElementById('nosingCheckbox').checked;
+  const winderType = document.getElementById('winderType').value;
 
-  // If a fraction is selected, adjust the input values
-  if (widthFraction !== "") {
-    width += eval(widthFraction);
-  }
-  if (heightFraction !== "") {
-    height += eval(heightFraction);
-  }
 
-  // Subtracting 0.5 from width
-  width -= 0.5;
+  switch(winderType) {
+    case '2StepHanger':
+      calculate2StepHanger();
+      break;
+    case '3StepHanger':
+      calculate3StepHanger();
+      break;
+    case '2StepDOT':
+      calculate2StepDOT();
+      break;
+    case '3StepDOT':
+      calculate3StepDOT();
+      break;
+    case '2Step3_5Post':
+      calculate2Step3_5Post();
+      break;
+    case '3Step3_5Post':
+      calculate3Step3_5Post();
+      break;
+    case '2Step5_5Post':
+      calculate2Step5_5Post();
+      break;
+    case '3Step5_5Post':
+      calculate3Step5_5Post();
+      break;
+    case '2StepWraparound':
+      calculate2StepWraparound();
+      break;
+    case '3StepWraparound':
+      calculate3StepWraparound();
+      break;
+    default:
+      console.error(`Unsupported winder type: ${winderType}`);
+  }
+}
+
+function calculate2StepHanger() {
+// Fetching Values, Checkboxes, Nosing
+let width = parseFloat(document.getElementById('widthInput').value);
+const widthFraction = document.getElementById('widthFraction').value;
+let height = parseFloat(document.getElementById('heightInput').value);
+const heightFraction = document.getElementById('heightFraction').value;
+const nosing = document.getElementById('nosingCheckbox').checked;
+const NS = document.getElementById('NS');
+const NSL = document.getElementById('NSL');
+const NSR = document.getElementById('NSR');
+const NSB = document.getElementById('NSB');
+const DW = document.getElementById('DW');
+
+ if (widthFraction !== "") {
+   width += eval(widthFraction);
+ }
+ if (heightFraction !== "") {
+   height += eval(heightFraction);
+ }
+
+// Core Math Calculations
   // Calculating values based on the formula
-  const s1 = width * Math.tan(29 * (Math.PI / 180)); // converting degrees to radians
-  const s3 = height * Math.tan(31 * (Math.PI / 180)); // converting degrees to radians
-  // Calculating S2 and SX
-  const s2 = height - s1;
+  width -= 0.5;
+  const s1 = width * Math.tan(45 * (Math.PI / 180));
+  //const s3 = height * Math.tan(31 * (Math.PI / 180));
+  //const s2 = height - s1;
   const sx = width - s3;
-  // Calc Diags with Square Root
   const w2 = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
   const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s1, 2));
 
-  //shift variables
-  const shiftw = 7 + width;
-  const shifts1 = 1 + s1;
-  const shiftw2 = 4 + w2;
-  const shifts2 = 0 + s2;
-  const shiftsx = sx - 1;
-  const shiftw3 = 4 + w3;
-  const shifts3 = 0.5 + s3;
+  // Shift Arithmetic
+  shiftw = 7 + width;
+  shifts1 = 1.5 + s1;
+  shiftw2 = 4 + w2;
+  shifts2 = 0 + s2;
+  shiftsx = sx - 1;
+  shiftw3 = 4 + w3;
+  shifts3 = s3 - 0.5;
 
+  
+  // Checkbox Arithmetic
+  if (NS.checked) {
+    shiftw -= 6.5; 
+    shiftw2 -= 3;
+    shiftw3 -= 3;
+  }
+  if (NSL.checked) {
+    shiftw -= 3.25; 
+  }
+  if (NSR.checked) {
+    shiftw -= 3.25;
+    shiftw2 -= 3; 
+  }
+  if (NSB.checked) {
+    shiftw3 -= 3; 
+  }
+  if (DW.checked) {
+    //Add DW Boards? 
+  }
   createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
 }
 
+function calculate3StepHanger() {
+// Fetching Values, Checkboxes, Nosing
+let width = parseFloat(document.getElementById('widthInput').value);
+const widthFraction = document.getElementById('widthFraction').value;
+let height = parseFloat(document.getElementById('heightInput').value);
+const heightFraction = document.getElementById('heightFraction').value;
+const nosing = document.getElementById('nosingCheckbox').checked;
+const NS = document.getElementById('NS');
+const NSL = document.getElementById('NSL');
+const NSR = document.getElementById('NSR');
+const NSB = document.getElementById('NSB');
+const DW = document.getElementById('DW');
+
+ if (widthFraction !== "") {
+   width += eval(widthFraction);
+ }
+ if (heightFraction !== "") {
+   height += eval(heightFraction);
+ }
+
+  // Core Math Calculations
+  // Calculating values based on the formula
+  width -= 0.5;
+  const s1 = width * Math.tan(29 * (Math.PI / 180));
+  const s3 = height * Math.tan(31 * (Math.PI / 180)); 
+  const s2 = height - s1;
+  const sx = width - s3;
+  const w2 = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
+  const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s3, 2));
+  console.log(s3);
+  // Shift Arithmetic
+  shiftw = 7 + width;
+  shifts1 = 1.5 + s1;
+  shiftw2 = 4 + w2;
+  shifts2 = s2 - 0;
+  shiftsx = 1.5 + sx;
+  shiftw3 = 4 + w3;
+  shifts3 = s3 - 0.5;
+
+  
+  // Checkbox Arithmetic
+  if (NS.checked) {
+    shiftw -= 6.5; 
+    shiftw2 -= 3;
+    shiftw3 -= 3;
+  }
+  if (NSL.checked) {
+    shiftw -= 3.25; 
+  }
+  if (NSR.checked) {
+    shiftw -= 3.25;
+    shiftw2 -= 3; 
+  }
+  if (NSB.checked) {
+    shiftw3 -= 3; 
+  }
+  if (DW.checked) {
+    //Add DW Boards? 
+  }
+  createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
+}
+
+function calculate3Step5_5Post() {
+// Fetching Values, Checkboxes, Nosing
+let width = parseFloat(document.getElementById('widthInput').value);
+const widthFraction = document.getElementById('widthFraction').value;
+let height = parseFloat(document.getElementById('heightInput').value);
+const heightFraction = document.getElementById('heightFraction').value;
+const nosing = document.getElementById('nosingCheckbox').checked;
+const NS = document.getElementById('NS');
+const NSL = document.getElementById('NSL');
+const NSR = document.getElementById('NSR');
+const NSB = document.getElementById('NSB');
+const DW = document.getElementById('DW');
+
+ if (widthFraction !== "") {
+   width += eval(widthFraction);
+ }
+ if (heightFraction !== "") {
+   height += eval(heightFraction);
+ }
+
+  // Core Math Calculations
+  // Calculating values based on the formula
+  const s1 = width * Math.tan(32 * (Math.PI / 180)); // converting degrees to radians
+  const s3 = height * Math.tan(24 * (Math.PI / 180)); // converting degrees to radians
+  const s2 = height - s1;
+  const sx = width - s3;
+  const w2 = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
+  const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s1, 2));
+
+  // Shift Arithmetic
+  shiftw = 5.5 + width;
+  shifts1 = 1.5 + s1;
+  shiftw2 = 4 + w2;
+  shifts2 = s2 + 0;
+  shiftsx = sx + 1.5;
+  shiftw3 = 4 + w3;
+  shifts3 = s3 + 4.5;
+
+  
+  // Checkbox Arithmetic
+  if (NS.checked) {
+    shiftw -= 6.5; 
+    shiftw2 -= 3;
+    shiftw3 -= 2;
+  }
+  if (NSL.checked) {
+    shiftw -= 3.25; 
+  }
+  if (NSR.checked) {
+    shiftw -= 3.25;
+    shiftw2 -= 3; 
+  }
+  if (NSB.checked) {
+    shiftw3 -= 2; 
+  }
+  if (DW.checked) {
+    //Add DW Boards? 
+  }
+  createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
+ }
+ 
 
 
 
@@ -78,10 +263,10 @@ function calculate() {
 
 
   // Round each answer to the nearest quarter and convert to fractions if needed
-  const roundToQuarter = (value) => Math.round(value * 4) / 4;
+   const roundToQuarter = (value) => Math.round(value * 4) / 4;
     
 // Function to convert decimal to fraction
-function toFraction(decimal) {
+    function toFraction(decimal) {
   const whole = Math.floor(decimal);
   const fraction = decimal - whole;
 
@@ -116,7 +301,10 @@ function toFraction(decimal) {
 }
 
     function createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3) {
-  // Displaying the results as mixed fractions if applicable
+  
+  
+
+      // Displaying Results
   const resultElement = document.getElementById('result');
   resultElement.innerHTML = `
     <div class="result-item">W: ${toFraction(roundToQuarter(shiftw))}</div>
