@@ -40,34 +40,34 @@ if (heightFraction !== "") {
 
   switch(winderType) {
     case '2StepHanger':
-      calculate2StepHanger();
+      calculate2StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '3StepHanger':
       calculate3StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '2StepDOT':
-      calculate2StepDOT();
+      calculate2StepDOT(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '3StepDOT':
-      calculate3StepDOT();
+      calculate3StepDOT(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '2Step3_5Post':
-      calculate2Step3_5Post();
+      calculate2Step3_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '3Step3_5Post':
-      calculate3Step3_5Post();
+      calculate3Step3_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '2Step5_5Post':
-      calculate2Step5_5Post();
+      calculate2Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '3Step5_5Post':
-      calculate3Step5_5Post();
+      calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '2StepWraparound':
-      calculate2StepWraparound();
+      calculate2StepWraparound(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     case '3StepWraparound':
-      calculate3StepWraparound();
+      calculate3StepWraparound(width, height, nosing, NS, NSL, NSR, NSB, DW);
       break;
     default:
       console.error(`Unsupported winder type: ${winderType}`);
@@ -76,30 +76,30 @@ if (heightFraction !== "") {
 
 function calculate2StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
 // Core Math Calculations
-  // Calculating values based on the formula
   width -= 0.5;
   const s1 = width * Math.tan(45 * (Math.PI / 180));
-  //const s3 = height * Math.tan(31 * (Math.PI / 180));
+  const s3 = height * Math.tan(45 * (Math.PI / 180));
   //const s2 = height - s1;
-  const sx = width - s3;
+  //const sx = width - s3;
   const w2 = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
-  const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s1, 2));
-
+  //const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s1, 2));
   // Shift Arithmetic
   shiftw = 7 + width;
   shifts1 = 1.5 + s1;
   shiftw2 = 4 + w2;
-  shifts2 = 0 + s2;
-  shiftsx = sx - 1;
-  shiftw3 = 4 + w3;
+  //shifts2 = 0 + s2;
+  //shiftsx = sx - 1;
+  //shiftw3 = 4 + w3;
   shifts3 = s3 - 0.5;
+  shiftsq = height + 3;
+  console.log(height);
+  console.log(shiftsq);
 
-  
   // Checkbox Arithmetic
   if (NS.checked) {
     shiftw -= 6.5; 
     shiftw2 -= 3;
-    shiftw3 -= 3;
+    //shiftw3 -= 3;
   }
   if (NSL.checked) {
     shiftw -= 3.25; 
@@ -109,12 +109,12 @@ function calculate2StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
     shiftw2 -= 3; 
   }
   if (NSB.checked) {
-    shiftw3 -= 3; 
+    shiftw2 -= 3; 
   }
   if (DW.checked) {
     //Add DW Boards? 
   }
-  createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
+  createResult(shiftw, shifts1, shiftw2, shifts3, shiftsq);
 }
 
 function calculate3StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
@@ -204,26 +204,7 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3) {
+    function createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3, shiftsq) {
     const roundToQuarter = (value) => Math.round(value * 4) / 4; // Rounding to quarter inch
     // Function to convert decimal to fraction
     function toFraction(decimal) {
@@ -266,6 +247,7 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
   // Check if the selected winder type is a 2-step winder
   if (twoStepWinders.includes(winderType)) {
     // If it's a 2-step winder, omit the results for w3 and s3
+    console.log(shiftsq);
     const resultElement = document.getElementById('result');
     resultElement.innerHTML = `
       <div class="result-item">W: ${toFraction(roundToQuarter(shiftw))}</div>
@@ -273,6 +255,7 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
       <div class="result-item">2W: ${toFraction(roundToQuarter(shiftw2))}</div>
       <div class="result-item">S2: ${toFraction(roundToQuarter(shifts2))}</div>
       <div class="result-item">SX: ${toFraction(roundToQuarter(shiftsx))}</div><br>
+      <div class="result-item">SQ: ${toFraction(roundToQuarter(shiftsq))}</div><br>
     `;
   } else {
     // If it's not a 2-step winder, include the results for w3 and s3
@@ -293,12 +276,3 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
     
     
 
-	  
-
-
-
-
-  
-  
- 
-  
