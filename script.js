@@ -79,7 +79,7 @@ function calculate2StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
   width -= 0.5;
   const s1 = width * Math.tan(45 * (Math.PI / 180));
   const s3 = height * Math.tan(45 * (Math.PI / 180));
-  //const s2 = height - s1;
+  const s2 = height - s1;
   //const sx = width - s3;
   const w2 = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
   //const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s1, 2));
@@ -87,13 +87,11 @@ function calculate2StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
   shiftw = 7 + width;
   shifts1 = 1.5 + s1;
   shiftw2 = 4 + w2;
-  //shifts2 = 0 + s2;
-  //shiftsx = sx - 1;
-  //shiftw3 = 4 + w3;
+  shifts2 = null; //rewrite for 1 and 2 not 1 and 3
+  shiftsx = null; // Has to be null otherwise order of arguments gets screwed
+  shiftw3 = null;
   shifts3 = s3 - 0.5;
-  shiftsq = height + 3;
-  console.log(height);
-  console.log(shiftsq);
+  shiftsq = height + 3.25;
 
   // Checkbox Arithmetic
   if (NS.checked) {
@@ -114,7 +112,7 @@ function calculate2StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
   if (DW.checked) {
     //Add DW Boards? 
   }
-  createResult(shiftw, shifts1, shiftw2, shifts3, shiftsq);
+  createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3, shiftsq);
 }
 
 function calculate3StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
@@ -207,6 +205,7 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
     function createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3, shiftsq) {
     const roundToQuarter = (value) => Math.round(value * 4) / 4; // Rounding to quarter inch
     // Function to convert decimal to fraction
+    console.log(shiftsq);
     function toFraction(decimal) {
       const whole = Math.floor(decimal);
       const fraction = decimal - whole;
@@ -243,18 +242,17 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
    const winderType = document.getElementById('winderType').value;
    // Define the 2-step winder types
    const twoStepWinders = ['2StepHanger', '2StepDot', '2Step3_5Post', '2Step5_5Post', '2StepWraparound'];
- 
+   console.log(shiftsq);
   // Check if the selected winder type is a 2-step winder
   if (twoStepWinders.includes(winderType)) {
     // If it's a 2-step winder, omit the results for w3 and s3
-    console.log(shiftsq);
+    console.log(shiftsx);
     const resultElement = document.getElementById('result');
     resultElement.innerHTML = `
       <div class="result-item">W: ${toFraction(roundToQuarter(shiftw))}</div>
       <div class="result-item">S1: ${toFraction(roundToQuarter(shifts1))}</div><br>
       <div class="result-item">2W: ${toFraction(roundToQuarter(shiftw2))}</div>
       <div class="result-item">S2: ${toFraction(roundToQuarter(shifts2))}</div>
-      <div class="result-item">SX: ${toFraction(roundToQuarter(shiftsx))}</div><br>
       <div class="result-item">SQ: ${toFraction(roundToQuarter(shiftsq))}</div><br>
     `;
   } else {
