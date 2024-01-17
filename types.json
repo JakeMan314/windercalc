@@ -1,0 +1,33 @@
+{
+    "2StepHanger": {
+      "angles": {
+        "s1": 32,
+        "s3": 24
+      },
+      "shifts": {
+        "shiftw": 5.5,
+        "shifts1": 2.5,
+        "shiftw2": 4,
+        "shifts2": 1,
+        "shiftsx": 2.5,
+        "shiftw3": 4.5,
+        "shifts3": 5
+      }
+    },
+    "3Step5_5Post": {
+      "angles": {
+        "s1": 32,
+        "s3": 24
+      },
+      "shifts": {
+        "shiftw": 5.5,
+        "shifts1": 2.5,
+        "shiftw2": 4,
+        "shifts2": 1,
+        "shiftsx": 2.5,
+        "shiftw3": 4.5,
+        "shifts3": 5
+      }
+    }
+    // ... other winder types ...
+  }

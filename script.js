@@ -3,6 +3,14 @@
   const widthInput = document.getElementById('widthInput');
   const heightInput = document.getElementById('heightInput');
 
+  fetch('path/to/your/json/file.json')
+  .then(response => response.json())
+  .then(data => {
+    // Now you can use your data
+    console.log(data);
+  })
+  .catch(error => console.error('Error:', error));
+
   widthInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -109,9 +117,6 @@ function calculate2StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
   if (NSB.checked) {
     shiftw2 -= 3; 
   }
-  if (DW.checked) {
-    //Add DW Boards? 
-  }
   createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3, shiftsq);
 }
 
@@ -150,9 +155,6 @@ function calculate3StepHanger(width, height, nosing, NS, NSL, NSR, NSB, DW) {
   }
   if (NSB.checked) {
     shiftw3 -= 3; 
-  }
-  if (DW.checked) {
-    //Add DW Boards? 
   }
   createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
 }
@@ -194,18 +196,12 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
   if (NSB.checked) {
     shiftw3 -= 3; 
   }
-  if (DW.checked) {
-    //Add DW Boards? 
-  }
   createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
  }
- 
-
 
     function createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3, shiftsq) {
     const roundToQuarter = (value) => Math.round(value * 4) / 4; // Rounding to quarter inch
     // Function to convert decimal to fraction
-    console.log(shiftsq);
     function toFraction(decimal) {
       const whole = Math.floor(decimal);
       const fraction = decimal - whole;
@@ -242,11 +238,9 @@ function calculate3Step5_5Post(width, height, nosing, NS, NSL, NSR, NSB, DW) {
    const winderType = document.getElementById('winderType').value;
    // Define the 2-step winder types
    const twoStepWinders = ['2StepHanger', '2StepDot', '2Step3_5Post', '2Step5_5Post', '2StepWraparound'];
-   console.log(shiftsq);
   // Check if the selected winder type is a 2-step winder
   if (twoStepWinders.includes(winderType)) {
     // If it's a 2-step winder, omit the results for w3 and s3
-    console.log(shiftsx);
     const resultElement = document.getElementById('result');
     resultElement.innerHTML = `
       <div class="result-item">W: ${toFraction(roundToQuarter(shiftw))}</div>
