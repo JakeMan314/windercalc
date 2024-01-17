@@ -1,33 +1,220 @@
 {
     "2StepHanger": {
+      "is2Step": true,
+      "needsquare": false,
       "angles": {
-        "s1": 32,
-        "s3": 24
+        "a": 32,
+        "b": 24
       },
-      "shifts": {
-        "shiftw": 5.5,
-        "shifts1": 2.5,
-        "shiftw2": 4,
-        "shifts2": 1,
-        "shiftsx": 2.5,
-        "shiftw3": 4.5,
-        "shifts3": 5
+      "nosingangles": {
+        "a": 32,
+        "b": 24
+      },
+      "shift": {
+        "width": 5.5,
+        "s1": 2.5,
+        "h2": 4,
+        "s2": 1,
+        "sx": 2.5,
+        "h3": 4.5,
+        "s3": 5
       }
     },
-    "3Step5_5Post": {
-      "angles": {
-        "s1": 32,
-        "s3": 24
+    "3StepHanger": {
+        "is2Step": false,
+        "needsquare": false,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5
+        }
       },
-      "shifts": {
-        "shiftw": 5.5,
-        "shifts1": 2.5,
-        "shiftw2": 4,
-        "shifts2": 1,
-        "shiftsx": 2.5,
-        "shiftw3": 4.5,
-        "shifts3": 5
+      "2StepDOT": {
+        "is2Step": true,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
+      },
+      "3StepDOT": {
+        "is2Step": false,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
+      },
+      "2Step3_5": {
+        "is2Step": true,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
+      },
+      "3Step3_5": {
+        "is2Step": false,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
+      },
+      "2Step5_5": {
+        "is2Step": true,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
+      },
+      "3Step5_5": {
+        "is2Step": false,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
+      },
+      "2StepWrap": {
+        "is2Step": true,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
+      },
+      "3StepWrap": {
+        "is2Step": false,
+        "needsquare": true,
+        "angles": {
+          "a": 32,
+          "b": 24
+        },
+        "nosingangles": {
+          "a": 32,
+          "b": 24
+        },
+        "shift": {
+          "width": 5.5,
+          "s1": 2.5,
+          "h2": 4,
+          "s2": 1,
+          "sx": 2.5,
+          "h3": 4.5,
+          "s3": 5,
+          "sq": 5
+        }
       }
-    }
-    // ... other winder types ...
   }

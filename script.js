@@ -3,11 +3,12 @@
   const widthInput = document.getElementById('widthInput');
   const heightInput = document.getElementById('heightInput');
 
-  fetch('path/to/your/json/file.json')
+  fetch('types.json')
   .then(response => response.json())
   .then(data => {
-    // Now you can use your data
     console.log(data);
+    const shiftValue = data['2StepHanger'].shift.width;
+    console.log(shiftValue);
   })
   .catch(error => console.error('Error:', error));
 
