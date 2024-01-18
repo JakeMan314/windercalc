@@ -3,12 +3,10 @@
       "is2Step": true,
       "needsquare": false,
       "angles": {
-        "a": 32,
-        "b": 24
+        "a": 45
       },
       "nosingangles": {
-        "a": 32,
-        "b": 24
+        "a": 45
       },
       "shift": {
         "width": 5.5,
@@ -24,12 +22,12 @@
         "is2Step": false,
         "needsquare": false,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 29,
+          "b": 31
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 29,
+          "b": 31
         },
         "shift": {
           "width": 5.5,
@@ -45,12 +43,10 @@
         "is2Step": true,
         "needsquare": true,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 47
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 43
         },
         "shift": {
           "width": 5.5,
@@ -67,12 +63,12 @@
         "is2Step": false,
         "needsquare": true,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 28,
+          "b": 32
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 28,
+          "b": 32
         },
         "shift": {
           "width": 5.5,
@@ -89,12 +85,10 @@
         "is2Step": true,
         "needsquare": true,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 42
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 42
         },
         "shift": {
           "width": 5.5,
@@ -111,12 +105,12 @@
         "is2Step": false,
         "needsquare": true,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 31,
+          "b": 26
         },
         "nosingangles": {
           "a": 32,
-          "b": 24
+          "b": 25
         },
         "shift": {
           "width": 5.5,
@@ -133,12 +127,10 @@
         "is2Step": true,
         "needsquare": true,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 40
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 40
         },
         "shift": {
           "width": 5.5,
@@ -159,8 +151,8 @@
           "b": 24
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 34,
+          "b": 23
         },
         "shift": {
           "width": 5.5,
@@ -177,12 +169,10 @@
         "is2Step": true,
         "needsquare": true,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 45
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 45
         },
         "shift": {
           "width": 5.5,
@@ -199,12 +189,12 @@
         "is2Step": false,
         "needsquare": true,
         "angles": {
-          "a": 32,
-          "b": 24
+          "a": 30,
+          "b": 30
         },
         "nosingangles": {
-          "a": 32,
-          "b": 24
+          "a": 30,
+          "b": 30
         },
         "shift": {
           "width": 5.5,
