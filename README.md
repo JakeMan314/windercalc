@@ -17,7 +17,7 @@ WinderCalc is a simple and efficient tool designed to calculate 2-step/3-step wi
 
 ## Installation
 
-Visit jakeman314.github.io/windercalc
+Visit [WinderCalc](https://jakeman314.github.io/windercalc)
 
 ## License
 
