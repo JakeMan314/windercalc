@@ -8,14 +8,15 @@
       "nosingangles": {
         "a": 45
       },
-      "shift": {
-        "width": 5.5,
+      "shifts": {
+        "width": 7,
         "s1": 2.5,
         "h2": 4,
-        "s2": 1,
+        "s2": -0.5,
         "sx": 2.5,
-        "h3": 4.5,
-        "s3": 5
+        "h3": 4,
+        "s3": -0.5,
+        "sq": 3.25
       }
     },
     "3StepHanger": {
@@ -29,14 +30,14 @@
           "a": 29,
           "b": 31
         },
-        "shift": {
-          "width": 5.5,
+        "shifts": {
+          "width": 7,
           "s1": 2.5,
           "h2": 4,
-          "s2": 1,
+          "s2": -0.5,
           "sx": 2.5,
-          "h3": 4.5,
-          "s3": 5
+          "h3": 4,
+          "s3": -0.5
         }
       },
       "2StepDOT": {
@@ -48,7 +49,7 @@
         "nosingangles": {
           "a": 43
         },
-        "shift": {
+        "shifts": {
           "width": 5.5,
           "s1": 2.5,
           "h2": 4,
@@ -70,7 +71,7 @@
           "a": 28,
           "b": 32
         },
-        "shift": {
+        "shifts": {
           "width": 5.5,
           "s1": 2.5,
           "h2": 4,
@@ -81,7 +82,7 @@
           "sq": 5
         }
       },
-      "2Step3_5": {
+      "2Step3_5Post": {
         "is2Step": true,
         "needsquare": true,
         "angles": {
@@ -90,7 +91,7 @@
         "nosingangles": {
           "a": 42
         },
-        "shift": {
+        "shifts": {
           "width": 5.5,
           "s1": 2.5,
           "h2": 4,
@@ -101,7 +102,7 @@
           "sq": 5
         }
       },
-      "3Step3_5": {
+      "3Step3_5Post": {
         "is2Step": false,
         "needsquare": true,
         "angles": {
@@ -112,18 +113,18 @@
           "a": 32,
           "b": 25
         },
-        "shift": {
-          "width": 5.5,
+        "shifts": {
+          "width": 6.75,
           "s1": 2.5,
           "h2": 4,
-          "s2": 1,
+          "s2": -0.5,
           "sx": 2.5,
-          "h3": 4.5,
-          "s3": 5,
-          "sq": 5
+          "h3": 5,
+          "s3": 2,
+          "sq": 6.75
         }
       },
-      "2Step5_5": {
+      "2Step5_5Post": {
         "is2Step": true,
         "needsquare": true,
         "angles": {
@@ -132,7 +133,7 @@
         "nosingangles": {
           "a": 40
         },
-        "shift": {
+        "shifts": {
           "width": 5.5,
           "s1": 2.5,
           "h2": 4,
@@ -143,7 +144,7 @@
           "sq": 5
         }
       },
-      "3Step5_5": {
+      "3Step5_5Post": {
         "is2Step": false,
         "needsquare": true,
         "angles": {
@@ -154,7 +155,7 @@
           "a": 34,
           "b": 23
         },
-        "shift": {
+        "shifts": {
           "width": 5.5,
           "s1": 2.5,
           "h2": 4,
@@ -174,7 +175,7 @@
         "nosingangles": {
           "a": 45
         },
-        "shift": {
+        "shifts": {
           "width": 5.5,
           "s1": 2.5,
           "h2": 4,
@@ -196,7 +197,7 @@
           "a": 30,
           "b": 30
         },
-        "shift": {
+        "shifts": {
           "width": 5.5,
           "s1": 2.5,
           "h2": 4,
