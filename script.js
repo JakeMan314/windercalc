@@ -94,11 +94,11 @@ console.log(shifts);
     case '3Step5_5Post':
       calculate3Step5_5Post(size, checkboxes, options, angles, shifts);
       break;
-    case '2StepWraparound':
-      calculate2StepWraparound(size, checkboxes, options, angles, shifts);
+    case '2StepWrap':
+      calculate2StepWrap(size, checkboxes, options, angles, shifts);
       break;
-    case '3StepWraparound':
-      calculate3StepWraparound(size, checkboxes, options, angles, shifts);
+    case '3StepWrap':
+      calculate3StepWrap(size, checkboxes, options, angles, shifts);
       break;
     default:
       console.error(`Unsupported winder type: ${winderType}`);
@@ -263,6 +263,48 @@ function calculate3Step5_5Post(size, checkboxes, options, angles, shifts) {
   createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
  }
 
+function calculate3StepWrap(size, checkboxes, options, angles, shifts) {
+
+// Core Math Calculations
+const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
+const s3 = size[1] * Math.tan(angles[1] * (Math.PI / 180)); 
+const s2 = size[1] - s1;
+const sx = size[0] - s3;
+const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
+const w3 = Math.sqrt(Math.pow(size[1], 2) + Math.pow(s3, 2));
+
+// Shift Arithmetic
+width = size[0] + shifts.width;
+step1 = s1 + shifts.s1;
+hypotenuse2 = w2 + shifts.h2;
+step2 = s2 + shifts.s2;
+stepx = sx + shifts.sx;
+hypotenuse3 = w3 + shifts.h3;
+step3 = s3 + shifts.s3;
+stepsq = size[1] + shifts.sq;
+
+
+// Checkbox Arithmetic
+if (NS.checked) {
+  width -= 3.25; 
+  hypotenuse2 -= 3;
+  hypotenuse3 -= 3;
+  stepsq -= 3.25;
+}
+if (NSL.checked) {
+  width -= 3.25; 
+}
+if (NSR.checked) {
+  width -= 3.25;
+  hypotenuse2 -= 3; 
+}
+if (NSB.checked) {
+  hypotenuse3 -= 3; 
+  stepsq -= 3.25;
+}
+createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
+}
+
     function createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq) {
     const roundToQuarter = (value) => Math.round(value * 4) / 4; // Rounding to quarter inch
     // Function to convert decimal to fraction
@@ -322,14 +364,14 @@ function calculate3Step5_5Post(size, checkboxes, options, angles, shifts) {
     // If it's not a 2-step winder, include the results for w3 and s3
     const resultElement = document.getElementById('result');
   resultElement.innerHTML = `
-    <div class="result-item">W: ${toFraction(roundToQuarter(width))}</div>
-    <div class="result-item">S1: ${toFraction(roundToQuarter(step1))}</div><br>
-    <div class="result-item">2W: ${toFraction(roundToQuarter(hypotenuse2))}</div>
-    <div class="result-item">S2: ${toFraction(roundToQuarter(step2))}</div>
-    <div class="result-item">SX: ${toFraction(roundToQuarter(stepx))}</div><br>
-    <div class="result-item">3W: ${toFraction(roundToQuarter(hypotenuse3))}</div>
-    <div class="result-item">S3: ${toFraction(roundToQuarter(step3))}</div>
-    <div class="result-item">SQ: ${toFraction(roundToQuarter(stepsq))}</div><br>
+    <div class="result-item"><b>W:</b> ${toFraction(roundToQuarter(width))}</div>
+    <div class="result-item"><b>S1:</b> ${toFraction(roundToQuarter(step1))}</div><br>
+    <div class="result-item"><b>2W:</b> ${toFraction(roundToQuarter(hypotenuse2))}</div>
+    <div class="result-item"><b>S2:</b> ${toFraction(roundToQuarter(step2))}</div>
+    <div class="result-item"><b>SX:</b> ${toFraction(roundToQuarter(stepx))}</div><br>
+    <div class="result-item"><b>3W:</b> ${toFraction(roundToQuarter(hypotenuse3))}</div>
+    <div class="result-item"><b>S3:</b> ${toFraction(roundToQuarter(step3))}</div>
+    <div class="result-item"><b>SQ:</b> ${toFraction(roundToQuarter(stepsq))}</div><br>
     `;
   }
 

@@ -37,13 +37,13 @@ body {
     button:hover {
       background-color: #45a049;
     }
-    .result {
-      margin-top: 200px;
-      border-top: 1px solid #ccc;
+    #result {
+      text-align: center;
       padding-top: 20px;
     }
     .result-item {
-      margin-bottom: 10px;
+      text-align: center;
+      margin-bottom: 5px;
       font-size: 18px;
     }
     .checkbox-group {
@@ -102,3 +102,11 @@ body {
 	  color: white;
 	  border-color: #4CAF50; /* Change border color when checked */
 	}
+
+  #myFooter {
+    text-align: center;
+    color: #303030;
+    font-size: 16px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
