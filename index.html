@@ -9,6 +9,7 @@
 <body>
   <h1>Winder Board Calculator</h1>
   <div class="container">
+    <div class="inputs">
     <select id="winderType" onchange="calculate()">
       <option value="2StepHanger" selected>2 Step Hanger</option>
       <option value="3StepHanger">3 Step Hanger</option>
@@ -67,7 +68,6 @@
     <option value="7/8">7/8</option>
     <option value="15/16">15/16</option>
   </select>
- 
     <div class="checkbox-group">
       <div>
         <input type="checkbox" id="NS" onchange="calculate()">
@@ -87,11 +87,15 @@
       </div>
     </div>
   <button onclick="calculate()">Calculate</button>
-  <div id="result"></div>
- </div>
- <footer id="myFooter">
-  Developed by Jake Klassen
+  <footer id="myFooter">
+    Developed by Jake Klassen
 </footer>
+</div>
+  <div class="outputs" id="result">
+  </div>
+  </div>
+
+ </div>
   <script src="script.js"></script>
 </body>
 </html>

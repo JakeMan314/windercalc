@@ -181,6 +181,48 @@ function calculate3StepHanger(size, checkboxes, options, angles, shifts) {
   createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3);
 }
 
+function calculate3StepDOT(size, checkboxes, options, angles, shifts) {
+
+  // Core Math Calculations
+  const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
+  const s3 = size[1] * Math.tan(angles[1] * (Math.PI / 180)); 
+  const s2 = size[1] - s1;
+  const sx = size[0] - s3;
+  const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
+  const w3 = Math.sqrt(Math.pow(size[1], 2) + Math.pow(s3, 2));
+
+  // Shift Arithmetic
+  width = size[0] + shifts.width;
+  step1 = s1 + shifts.s1;
+  hypotenuse2 = w2 + shifts.h2;
+  step2 = s2 + shifts.s2;
+  stepx = sx + shifts.sx;
+  hypotenuse3 = w3 + shifts.h3;
+  step3 = s3 + shifts.s3;
+  stepsq = size[1] + shifts.sq;
+
+
+  // Checkbox Arithmetic
+  if (NS.checked) {
+    width -= 3.25; 
+    hypotenuse2 -= 2;
+    hypotenuse3 -= 2;
+    stepsq -= 3.25;
+  }
+  if (NSL.checked) {
+    width -= 3.25; 
+  }
+  if (NSR.checked) {
+    width -= 3.25;
+    hypotenuse2 -= 2; 
+  }
+  if (NSB.checked) {
+    hypotenuse3 -= 2; 
+    stepsq -= 3.25;
+  }
+  createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
+}
+
 function calculate3Step3_5Post(size, checkboxes, options, angles, shifts) {
 
   // Core Math Calculations
@@ -345,35 +387,35 @@ createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq
 
    console.log("width", width, "S1", step1, "W2", hypotenuse2, "S2",  step2, "SX",  stepx, "W3",  hypotenuse3, "S3",  step3, "SQ",  stepsq);
 
+  let resultobj = {
+    width: width,
+    s1: step1,
+    h2: hypotenuse2,
+    s2: step2,
+    sx: stepx,
+    h3: hypotenuse3,
+    s3: step3,
+    sq: stepsq
+  };
+  console.log(resultobj);
+
+  function displayResults(resultobj) {
+    let result = '';
   
+    for (let key in resultobj) {
+      if (resultobj[key] !== undefined && resultobj[key] !== null) {
+        console.log(key, resultobj[key]);
+        result += `<div class="result-item"><b>${key}:</b> ${toFraction(roundToQuarter(resultobj[key]))}</div><br>`;
+      }
+    }
   
-   // Define the 2-step winder types
-   const twoStepWinders = ['2StepHanger', '2StepDot', '2Step3_5Post', '2Step5_5Post', '2StepWraparound'];
-  // Check if the selected winder type is a 2-step winder
-  if (twoStepWinders.includes(winderType)) {
-    // If it's a 2-step winder, omit the results for w3 and s3
-    const resultElement = document.getElementById('result');
-    resultElement.innerHTML = `
-      <div class="result-item">W: ${toFraction(roundToQuarter(width))}</div>
-      <div class="result-item">S1: ${toFraction(roundToQuarter(step1))}</div><br>
-      <div class="result-item">2W: ${toFraction(roundToQuarter(hypotenuse2))}</div>
-      <div class="result-item">S2: ${toFraction(roundToQuarter(step3))}</div>
-      <div class="result-item">SQ: ${toFraction(roundToQuarter(stepsq))}</div><br>
-    `;
-  } else {
-    // If it's not a 2-step winder, include the results for w3 and s3
-    const resultElement = document.getElementById('result');
-  resultElement.innerHTML = `
-    <div class="result-item"><b>W:</b> ${toFraction(roundToQuarter(width))}</div>
-    <div class="result-item"><b>S1:</b> ${toFraction(roundToQuarter(step1))}</div><br>
-    <div class="result-item"><b>2W:</b> ${toFraction(roundToQuarter(hypotenuse2))}</div>
-    <div class="result-item"><b>S2:</b> ${toFraction(roundToQuarter(step2))}</div>
-    <div class="result-item"><b>SX:</b> ${toFraction(roundToQuarter(stepx))}</div><br>
-    <div class="result-item"><b>3W:</b> ${toFraction(roundToQuarter(hypotenuse3))}</div>
-    <div class="result-item"><b>S3:</b> ${toFraction(roundToQuarter(step3))}</div>
-    <div class="result-item"><b>SQ:</b> ${toFraction(roundToQuarter(stepsq))}</div><br>
-    `;
+    return result;
   }
+  
+  let result = displayResults({ width: width, s1: step1, h2: hypotenuse2, s2: step2, sx: stepx, h3: hypotenuse3, s3: step3, sq: stepsq});
+  const resultElement = document.getElementById('result');
+  resultElement.innerHTML = result;
+
 
 
   }

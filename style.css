@@ -7,12 +7,23 @@ body {
       text-align: center;
     }
     .container {
-      max-width: 400px;
+      display: flex;
+      max-width: 40%;
       margin: 0 auto;
-      padding: 20px;
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      justify-content: space-between;
+      padding: 10px;
+      align-items: center;
+      
+      
+    }
+    .inputs, .outputs {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%; /* Adjust as needed */
+  
     }
     label, select, input, button {
       display: block;
@@ -43,13 +54,22 @@ body {
     }
     .result-item {
       text-align: center;
-      margin-bottom: 5px;
-      font-size: 18px;
+      vertical-align: middle;
+      height: 20px; /* Adjust as needed */
+      align-items: center;
+      justify-content: center;
     }
+    .result-item sup, .result-item sub {
+
+      position: relative;
+      font-size: 90%; /* Adjust as needed */
+     line-height: 1; /* Adjust as needed */
+}
     .checkbox-group {
       text-align: center;
       display: flex;
       justify-content: center;
+      align-items: center;
       padding-right: 8px;
     }
     .checkbox-group div {
@@ -61,6 +81,7 @@ body {
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+      align-items: center;
     }
     boxlabel {
       text-align: center;
@@ -71,6 +92,7 @@ body {
     .checkbox-container {
  	  text-align: center;
  	  margin-bottom: 20px; /* Adjust spacing */
+     align-items: center;
 	}
 
 	#nosingCheckbox {
