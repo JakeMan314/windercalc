@@ -16,13 +16,11 @@
     });
   });
   
-  //fetch json types file and set variable
+  //fetch JSON
   let jsonData = null;
   fetch('types.json')
   .then(response => response.json())
   .then(data => {
-    //console.log(data);
-    //const shiftValue = data['2StepHanger'].shift.width;
     jsonData = data;
   })
   .catch(error => console.error('Error:', error));
@@ -269,21 +267,22 @@
     
     // Core Math Calculations
     //width -= 0.5;
-    const s1 = width * Math.tan(32 * (Math.PI / 180));
-    const s3 = height * Math.tan(24 * (Math.PI / 180)); 
-    const s2 = height - s1;
-    const sx = width - s3;
-    const w2 = Math.sqrt(Math.pow(width, 2) + Math.pow(s1, 2));
-    const w3 = Math.sqrt(Math.pow(height, 2) + Math.pow(s3, 2));
+    const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
+    const s3 = size[1] * Math.tan(angles[1] * (Math.PI / 180)); 
+    const s2 = size[1] - s1;
+    const sx = size[0] - s3;
+    const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
+    const w3 = Math.sqrt(Math.pow(size[1], 2) + Math.pow(s3, 2));
     
     // Shift Arithmetic
-    shiftw = width + 5.5;
-    shifts1 = s1 + 2.5;
-    shiftw2 = w2 + 4;
-    shifts2 = s2 + 1;
-    shiftsx = sx + 2.5;
-    shiftw3 = w3 + 4.5;
-    shifts3 = s3 + 5;
+    width = size[0] + shifts.width;
+    step1 = s1 + shifts.s1;
+    hypotenuse2 = w2 + shifts.h2;
+    step2 = s2 + shifts.s2;
+    stepx = sx + shifts.sx;
+    hypotenuse3 = w3 + shifts.h3;
+    step3 = s3 + shifts.s3;
+    stepsq = size[1] + shifts.sq;
     
     
     // Checkbox Arithmetic
@@ -302,7 +301,7 @@
     if (NSB.checked) {
       shiftw3 -= 3; 
     }
-    createResult(shiftw, shifts1, shiftw2, shifts2, shiftsx, shiftw3, shifts3);
+    createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
   
   function calculate3StepWrap(size, checkboxes, options, angles, shifts) {
@@ -403,7 +402,8 @@
       let result = '';
       
       for (let key in resultobj) {
-        if (resultobj[key] !== undefined && resultobj[key] !== null) {
+        if (resultobj[key] !== undefined && resultobj[key] !== null && !isNaN(resultobj[key])
+        ) {
           console.log(key, resultobj[key]);
           result += `<div class="result-item"><b>${key}:</b> ${toFraction(roundToQuarter(resultobj[key]))}</div><br>`;
         }

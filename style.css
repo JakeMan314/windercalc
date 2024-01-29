@@ -113,7 +113,7 @@ body {
 	}
 	
 	#nosingCheckbox:checked + .nosing-label {
-	  background-color: #38813A;
+	  background-color: #4CAF50;
 	  color: white;
 	  border-color: #4CAF50; /* Change border color when checked */
 	}
