@@ -63,7 +63,6 @@
     const options = [winderType, nosing]; //always can add more options
     const angles = [a, b];
     const shifts = jsonData[winderType].shifts
-    console.log(shifts);
     
     
     
@@ -383,9 +382,7 @@
       }
     }
     const winderType = document.getElementById('winderType').value;
-    
-    console.log("width", width, "S1", step1, "W2", hypotenuse2, "S2",  step2, "SX",  stepx, "W3",  hypotenuse3, "S3",  step3, "SQ",  stepsq);
-    
+   
     let resultobj = {
       width: width,
       s1: step1,
@@ -404,7 +401,6 @@
       for (let key in resultobj) {
         if (resultobj[key] !== undefined && resultobj[key] !== null && !isNaN(resultobj[key])
         ) {
-          console.log(key, resultobj[key]);
           result += `<div class="result-item"><b>${key}:</b> ${toFraction(roundToQuarter(resultobj[key]))}</div><br>`;
         }
       }
