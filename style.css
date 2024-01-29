@@ -1,134 +1,127 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 50px;
-  background-color: #f4f4f4;
-}
-h1 {
-  text-align: center;
-}
-.container {
-  display: flex;
-  max-width: 40%;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  justify-content: space-between;
-  padding: 10px;
-  align-items: center;
-  
-  
-}
-.inputs, .outputs {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      max-width: 40%;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      justify-content: space-between;
+      padding: 10px;
+      align-items: center;
+    }
+    .inputs, .outputs {
   flex-direction: column;
   justify-content: space-between;
-  width: 90%; /* Adjust as needed */
-  
-}
-label, select, input, button {
-  display: block;
-  width: calc(100% - 6%);
-  margin: 10px auto;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-select, input {
-  width: calc(100% - 22px);
-}
-button {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-button:hover {
-  background-color: #45a049;
-}
-#result {
-  text-align: center;
-  padding-top: 20px;
-}
-.result-item {
-  text-align: center;
-  vertical-align: middle;
-  height: 20px; /* Adjust as needed */
-  align-items: center;
-  justify-content: center;
-}
-.result-item sup, .result-item sub {
-  
-  position: relative;
-  font-size: 90%; /* Adjust as needed */
-  line-height: 1; /* Adjust as needed */
-}
-.checkbox-group {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 8px;
-}
-.checkbox-group div {
-  display: inline-block;
-  margin-right: 10px;
-  padding: 8px;
-  padding-right: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  align-items: center;
-}
-boxlabel {
-  text-align: center;
-  margin: 10px auto;
-  padding: 5px;
-  font-size: 16px;
-}
-.checkbox-container {
-  text-align: center;
-  margin-bottom: 20px; /* Adjust spacing */
-  align-items: center;
-}
+  width: 90%;
+    }
+    label, select, input, button {
+      display: block;
+      width: calc(100% - 6%);
+      margin: 10px auto;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      text-align: center;
+      padding-top: 20px;
+    }
+    .result-item {
+      text-align: center;
+      vertical-align: middle;
+      height: 20px; /* Adjust as needed */
+      align-items: center;
+      justify-content: center;
+    }
+    .result-item sup, .result-item sub {
 
-#nosingCheckbox {
-  display: none; /* Hide the checkbox */
+      position: relative;
+      font-size: 90%; /* Adjust as needed */
+     line-height: 1; /* Adjust as needed */
 }
+    .checkbox-group {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    .checkbox-group div {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px;
+      font-size: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      align-items: center;
+    }
+    boxlabel {
+      text-align: center;
+      margin: 10px auto;
+      padding: 5px;
+      font-size: 12px;
+    }
+    .checkbox-container {
+ 	  text-align: center;
+ 	  margin-bottom: 20px; /* Adjust spacing */
+     align-items: center;
+	}
 
-.nosing-label {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  margin: 0px auto;
-  margin-bottom: -10px;
-  padding: 8px;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transition added */
-}
+	#nosingCheckbox {
+	  display: none; /* Hide the checkbox */
+	}
+	
+	.nosing-label {
+	  display: inline-block;
+	  padding: 10px 20px;
+	  background-color: #4b514b;
+	  margin: 0px auto;
+	  margin-bottom: -10px;
+      padding: 8px;
+	  color: white;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  font-size: 16px;
+	  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transition added */
+	}
+	
+	.nosing-label:hover {
+	  background-color: #409443;
+	  color: white;
+	  border-color: #4CAF50; /* Change border color on hover */
+	}
+	
+	#nosingCheckbox:checked + .nosing-label {
+	  background-color: #38813A;
+	  color: white;
+	  border-color: #4CAF50; /* Change border color when checked */
+	}
 
-.nosing-label:hover {
-  background-color: #409443;
-  color: white;
-  border-color: #4CAF50; /* Change border color on hover */
-}
-
-#nosingCheckbox:checked + .nosing-label {
-  background-color: #38813A;
-  color: white;
-  border-color: #4CAF50; /* Change border color when checked */
-}
-
-#myFooter {
-  text-align: center;
-  color: #303030;
-  font-size: 16px;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
+  #myFooter {
+    text-align: center;
+    color: #303030;
+    font-size: 16px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
