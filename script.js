@@ -177,6 +177,43 @@
     }
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3);
   }
+
+  function calculate2StepDOT(size, checkboxes, options, angles, shifts) {
+    // Core Math Calculations
+    const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
+    const s3 = size[1] * Math.tan(angles[0] * (Math.PI / 180));
+    const s2 = size[1] - s1;
+    const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
+    
+    //New Shift Arithmatic
+    //everything is added Var + Shift (with possible negative shift)
+    width = size[0] + shifts.width;
+    step1 = s1 + shifts.s1;
+    hypotenuse2 = w2 + shifts.h2;
+    step2 = null;
+    stepx = null;
+    hypotenuse3 = null;
+    step3 = s3 + shifts.s3;
+    stepsq = size[1] + shifts.sq;
+    
+    
+    // Checkbox Arithmetic
+    if (NS.checked) {
+      width -= 6.5; 
+      hypotenuse2 -= 3;
+    }
+    if (NSL.checked) {
+      width -= 3.25; 
+    }
+    if (NSR.checked) {
+      width -= 3.25;
+      hypotenuse2 -= 3; 
+    }
+    if (NSB.checked) {
+      hypotenuse2 -= 3; 
+    }
+    createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
+  }
   
   function calculate3StepDOT(size, checkboxes, options, angles, shifts) {
     
