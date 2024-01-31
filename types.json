@@ -44,20 +44,21 @@
     "is2Step": true,
     "needsquare": true,
     "angles": {
-      "a": 47
+      "a": 47,
+      "b": 43
     },
     "nosingangles": {
       "a": 43
     },
     "shifts": {
       "width": 6.75,
-      "s1": 2.5,
+      "s1": -1.5,
       "h2": 3.5,
       "s2": 1,
       "sx": 2.5,
       "h3": 4,
-      "s3": 5,
-      "sq": 5
+      "s3": 0,
+      "sq": 5.25
     }
   },
   "3StepDOT": {

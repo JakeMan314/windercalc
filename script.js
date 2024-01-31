@@ -106,7 +106,6 @@
     size[0] -= 0.5;
     const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
     const s3 = size[1] * Math.tan(angles[0] * (Math.PI / 180));
-    const s2 = size[1] - s1;
     const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
     
     //New Shift Arithmatic
@@ -181,8 +180,7 @@
   function calculate2StepDOT(size, checkboxes, options, angles, shifts) {
     // Core Math Calculations
     const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
-    const s3 = size[1] * Math.tan(angles[0] * (Math.PI / 180));
-    const s2 = size[1] - s1;
+    const s3 = size[1] * Math.tan(angles[1] * (Math.PI / 180));
     const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
     
     //New Shift Arithmatic
@@ -210,7 +208,7 @@
       hypotenuse2 -= 3; 
     }
     if (NSB.checked) {
-      hypotenuse2 -= 3; 
+      stepsq -= 3.25; 
     }
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
