@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Winder Board Calculator</title>
+  <title>Winder Calculator</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 </head>
 <body>
-  <h1>Winder Board Calculator</h1>
+  <h1>Winder Calculator</h1>
   <div class="container">
     <div class="inputs">
       <select id="winderType" onchange="calculate()">
-        <option value="2StepHanger" selected>2 Step Hanger</option>
-        <option value="3StepHanger">3 Step Hanger</option>
+        <option value="2StepHanger" selected>2 Step Hanger (In Progress)</option>
+        <option value="3StepHanger">3 Step Hanger (Most Accurate)</option>
         <option value="2StepDOT">2 Step DOT (In Progress)</option>
         <option value="3StepDOT">3 Step DOT</option>
         <option value="2Step3_5Post">2 Step 3.5 Post (In Progress)</option>
@@ -87,8 +88,10 @@
           </div>
         </div>
         <button onclick="calculate()">Calculate</button>
+        <button id="clear" onclick="clearing()">Clear</button>
         <footer id="myFooter">
-          Developed by Jake Klassen
+          <div id="credits">Developed by Jake Klassen</div>
+          <div id="version">Version</div>
         </footer>
       </div>
       <div class="outputs" id="result">
