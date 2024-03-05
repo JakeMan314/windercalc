@@ -133,3 +133,8 @@ boxlabel {
 #clear {
   background-color: #4b514b;
 }
+
+.link {
+  color: black; /* Change this to the color you want */
+  text-decoration: none; /* Removes the underline */
+}

@@ -28,8 +28,7 @@
         <label class="nosing-label" for="nosingCheckbox">
           Nosing
         </label>
-      </div>
-      <label for="widthInput">Width:</label>
+      </div> 
       <input type="text" id="widthInput" placeholder="Enter Width value" onchange="calculate()">
       <select id="widthFraction" onchange="calculate()">
         <option value="">Select fraction / None</option>
@@ -49,7 +48,6 @@
         <option value="7/8">7/8</option>
         <option value="15/16">15/16</option>
       </select>
-      <label for="heightInput">Height:</label>
       <input type="text" id="heightInput" placeholder="Enter Height value" onchange="calculate()">
       <select id="heightFraction" onchange="calculate()">
         <option value="">Select fraction / None</option>
@@ -90,7 +88,8 @@
         <button onclick="calculate()">Calculate</button>
         <button id="clear" onclick="clearing()">Clear</button>
         <footer id="myFooter">
-          <div id="credits">Developed by Jake Klassen</div>
+          <div id="credits">Developed by
+          <a href="https://github.com/JakeMan314/windercalc" class="link">Jake Klassen</a></div>
           <div id="version">Version</div>
         </footer>
       </div>
