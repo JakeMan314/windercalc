@@ -1,14 +1,16 @@
 {
   "setup": {
-    "version": "1.4.2",
+    "version": "1.4.3",
     "stick": 3.25,
-      "hangar": 0.5,
-      "2step": {
-        "hypotenuseshift": 0.5
-      },
-      "3step": {
-        "hypotenuseshift": 0.25
-      }
+    "hangar": 0.5,
+    "board": 1.5,
+    "nosingwidth": 1,
+    "2step": {
+      "hypotenuseshift": 0.5
+    },
+    "3step": {
+      "hypotenuseshift": 0.25
+    }
   },
   "winders": {
     "2StepHanger": {
@@ -50,6 +52,25 @@
         "s3": -0.5
       }
     },
+    "3StepHangerStrict": {
+      "is2Step": false,
+      "angles": {
+        "a": 29,
+        "b": 31
+      },
+      "nosingangles": {
+        "a": 30,
+        "b": 30
+      },
+      "shifts": {
+        "s1": 0.5,
+        "h2": 3.75,
+        "s2": 0.5,
+        "sx": 0.5,
+        "h3": 3.75,
+        "s3": 0.5
+      }
+    },
     "2StepDOT": {
       "is2Step": true,
       "angles": {
@@ -84,6 +105,27 @@
       "shifts": {
         "width": 6.75,
         "s1": 2.5,
+        "h2": 3.5,
+        "s2": 2.5,
+        "sx": 2.5,
+        "h3": 4.5,
+        "s3": 2,
+        "sq": 5.25
+      }
+    },
+    "3StepDOTStrict": {
+      "is2Step": false,
+      "angles": {
+        "a": 28,
+        "b": 32
+      },
+      "nosingangles": {
+        "a": 27.984375,
+        "b": 32
+      },
+      "shifts": {
+        "post": 3.5,
+        "s1": 0.5,
         "h2": 3.5,
         "s2": 2.5,
         "sx": 2.5,
@@ -162,14 +204,13 @@
         "b": 23
       },
       "shifts": {
-        "width": 5.5,
-        "s1": 2.5,
-        "h2": 3.5,
-        "s2": 1,
-        "sx": 2.5,
-        "h3": 4,
-        "s3": 5,
-        "sq": 5
+        "post": 5.5,
+        "s1": 0.5,
+        "h2": 3.75,
+        "s2": 0.5,
+        "sx": 0.5,
+        "h3": 4.75,
+        "s3": 0.5
       }
     },
     "2StepWrap": {

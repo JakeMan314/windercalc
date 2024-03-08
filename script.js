@@ -29,53 +29,76 @@
   })
   .catch(error => console.error('Error:', error));
   
-  // Clearing upon refresh
+  //clearing upon refresh
   window.onload = function() {
     clearing();
   };
 
   function clearing() {
-    // Clear all inputs
-    console.log('clearing');
-
+    //Clear all inputs
     //input clearing
     const textInputs = document.querySelectorAll('input[type="text"]');
     textInputs.forEach(function(input) {
       input.value = '';
     });
-    
     //fraction clearing
     const widthFraction = document.getElementById('widthFraction');
     widthFraction.selectedIndex = 0;
     const heightFraction = document.getElementById('heightFraction');
     heightFraction.selectedIndex = 0;
-
     //nosing clearing
     const nosing = document.getElementById('nosingCheckbox');
     nosing.checked = false;
-
     //checkbox clearing
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(function(checkbox) {
       checkbox.checked = false;
     });
-
     //result clearing 
     const resultElement = document.getElementById('result');
     resultElement.innerHTML = '';
-    
   }
 
   function overshoot() {
-    // add code here to calculate overshootou
+    // add code here to calculate overshoot
     // if s3 > width, then s3 -= width
     // then s3 * tan(a) = sx (double check this, is it actually that angle?
     // its overshot if greater than width, then it adds sx/s2 to boards
   }
 
-  //add angles import from calculate
+  function stickover(angle, boards) {
+    //this function uses the angle and boards to calculate the exact mark of the edge of the board, from here i can add sticks to the s1 and s3
+    const over = boards / Math.cos(angle * (Math.PI / 180));
+    return over;
+  }
+
+  function checkbox(width, hypotenuse2, hypotenuse3, stepsq, checkboxes, stick) {
+    if (checkboxes.NS) {
+      width -= stick; 
+      hypotenuse2 -= 3;
+      hypotenuse3 -= 3;
+      stepsq -= stick;
+    }
+    if (checkboxes.NSL) {
+      width -= stick; 
+    }
+    if (checkboxes.NSR) {
+      width -= stick;
+      hypotenuse2 -= 3; 
+    }
+    if (checkboxes.NSB) {
+      hypotenuse3 -= 3; 
+      stepsq -= stick;
+    }   
+    return {
+      width: width,
+      hypotenuse2: hypotenuse2,
+      hypotenuse3: hypotenuse3,
+      stepsq: stepsq
+    };
+  }
+
   function calculate() {
-    console.log('calculating');
     //variable setup
     const winderType = document.getElementById('winderType').value;
     let width = parseFloat(document.getElementById('widthInput').value);
@@ -106,24 +129,53 @@
       b = jsonData.winders[winderType].angles.b
     }
 
+    //new json setup for arguments all in one object
+    var JsonObject = {
+      "width": width,
+      "height": height,
+      "winderType": winderType,
+      "checkboxes": {
+        "NS": NS.checked,
+        "NSL": NSL.checked,
+        "NSR": NSR.checked,
+        "NSB": NSB.checked,
+      },
+      "nosing": nosing,
+      "nosingwidth": jsonData.setup.nosingwidth,
+      "stick": jsonData.setup.stick,
+      "hangar": jsonData.setup.hangar,
+      "board": jsonData.setup.board,
+      "angles": jsonData.winders[winderType].angles,
+      "shifts": jsonData.winders[winderType].shifts
+  };
+
     const stick = jsonData.setup.stick;
     const hangar = jsonData.setup.hangar;
-
-    //array setup for arguments
+    const board = jsonData.setup.board;
+    //OLD array setup for arguments
     const size = [width, height];
     const checkboxes = [NS, NSL, NSR, NSB];
-    const options = [winderType, nosing, stick, hangar]; //always can add more options
+    const options = [winderType, nosing, stick, hangar, board]; //always can add more options
     const angles = [a, b];
     const shifts = jsonData.winders[winderType].shifts; //in future consider converting all to var or json
     
-    
+    // Define a JavaScript object with date-value pairs
+    // Initialize an empty array to store the result
+    var result = [];
+
+    // Iterate over each property in the json_data object
+    for (var i in shifts) {
+        // Push an array containing the date (property) and its corresponding value into the 'result' array
+        result.push(shifts[i]);
+    }
+
     
     switch(winderType) {
       case '2StepHanger':
       calculate2StepHanger(size, checkboxes, options, angles, shifts);
       break;
       case '3StepHanger':
-      calculate3StepHanger(size, checkboxes, options, angles, shifts);
+      calculate3StepHanger(size, checkboxes, options, angles, shifts, JsonObject);
       break;
       case '2StepDOT':
       calculate2StepDOT(size, checkboxes, options, angles, shifts);
@@ -141,13 +193,19 @@
       calculate2Step5_5Post(size, checkboxes, options, angles, shifts);
       break;
       case '3Step5_5Post':
-      calculate3Step5_5Post(size, checkboxes, options, angles, shifts);
+      calculate3Step5_5Post(JsonObject);
       break;
       case '2StepWrap':
       calculate2StepWrap(size, checkboxes, options, angles, shifts);
       break;
       case '3StepWrap':
       calculate3StepWrap(size, checkboxes, options, angles, shifts);
+      break;
+      case '3StepHangerStrict':
+      calculate3StepHangerStrict(JsonObject);
+      break;
+      case '3StepDOTStrict':
+      calculate3StepDOTStrict(JsonObject);
       break;
       default:
       console.error(`Unsupported winder type: ${winderType}`);
@@ -198,7 +256,7 @@
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
   
-  function calculate3StepHanger(size, checkboxes, options, angles, shifts) {
+  function calculate3StepHanger(size, checkboxes, options, angles, shifts, JsonObject) {
     
     // Core Math Calculations
     size[0] -= options[3];
@@ -208,7 +266,7 @@
     const sx = size[0] - s3;
     const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
     const w3 = Math.sqrt(Math.pow(size[1], 2) + Math.pow(s3, 2));
-    
+    stickover(angles[0], options[4]);
     // Shift Arithmetic
     width = size[0] + (options[2] * 2) + options[3];
     step1 = s1 + shifts.s1;
@@ -234,6 +292,36 @@
     if (checkboxes[3].checked) {
       hypotenuse3 -= 3; 
     }
+    createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3);
+  }
+
+  function calculate3StepHangerStrict(JsonObject) {
+    
+    // Core Math Calculations
+    JsonObject.width -= JsonObject.hangar;
+    const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180));
+    const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
+    const s2 = JsonObject.height - s1;
+    const sx = JsonObject.width - s3;
+    const w2 = Math.sqrt(Math.pow(JsonObject.width, 2) + Math.pow(s1, 2));
+    const w3 = Math.sqrt(Math.pow(JsonObject.height, 2) + Math.pow(s3, 2));
+    const sticka = stickover(JsonObject.angles.a, JsonObject.board);
+    const stickb = stickover(JsonObject.angles.b, JsonObject.board);
+    
+    // Shift Arithmetic
+    width = JsonObject.width + (JsonObject.stick * 2) + JsonObject.hangar;
+    step1 = s1 - JsonObject.board + sticka + JsonObject.shifts.s1;
+    hypotenuse2 = w2 + JsonObject.shifts.h2;
+    step2 = s2 - JsonObject.shifts.s2;
+    stepx = sx + stickb + JsonObject.shifts.sx;
+    hypotenuse3 = w3 + JsonObject.shifts.h3;
+    step3 = s3 - stickb + JsonObject.shifts.s3;
+    let stepsq; //needed so checkbox doesnt act on it
+    stick = (JsonObject.stick * 2);
+
+    //checkbox function
+    ({ width, hypotenuse2, hypotenuse3 } = checkbox(width, hypotenuse2, hypotenuse3, stepsq, JsonObject.checkboxes, JsonObject.stick));
+
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3);
   }
 
@@ -314,6 +402,38 @@
     }
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
+
+  function calculate3StepDOTStrict(JsonObject) {
+    
+    // Core Math Calculations
+    //need to calculate 1" nosing up
+    //use stickover for it?
+
+
+    const up = Math.cos(JsonObject.angles.a * (Math.PI / 180)) * JsonObject.nosingwidth;
+
+    const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180)); //good
+    const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
+    const s2 = JsonObject.height - s1;
+    const sx = JsonObject.width - s3;
+    const w2 = Math.sqrt(Math.pow(JsonObject.width, 2) + Math.pow(s1, 2));
+    const w3 = Math.sqrt(Math.pow(JsonObject.height, 2) + Math.pow(s3, 2));
+
+
+    const sticka = stickover(JsonObject.angles.a, JsonObject.board);
+    const stickb = stickover(JsonObject.angles.b, JsonObject.board);
+    
+    // Shift Arithmetic
+    width = JsonObject.width + JsonObject.shifts.post + JsonObject.stick; //good
+    step1 = s1 - JsonObject.board + sticka; + JsonObject.shifts.post + JsonObject.shifts.s1 //good
+    hypotenuse2 = w2 + JsonObject.shifts.h2;
+    step2 = s2 - JsonObject.shifts.s2;
+    stepx = sx + stickb + JsonObject.shifts.sx;
+    hypotenuse3 = w3 + JsonObject.shifts.h3;
+    step3 = s3 - stickb + JsonObject.shifts.s3;
+    
+    createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3);
+  }
   
   function calculate3Step3_5Post(size, checkboxes, options, angles, shifts) {
     
@@ -357,44 +477,31 @@
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
   
-  function calculate3Step5_5Post(size, checkboxes, options, angles, shifts) {
+  function calculate3Step5_5Post(JsonObject) {
     
-    // Core Math Calculations
-    //width -= 0.5;
-    const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
-    const s3 = size[1] * Math.tan(angles[1] * (Math.PI / 180)); 
-    const s2 = size[1] - s1;
-    const sx = size[0] - s3;
-    const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
-    const w3 = Math.sqrt(Math.pow(size[1], 2) + Math.pow(s3, 2));
+    const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180));
+    const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
+    const s2 = JsonObject.height - s1;
+    const sx = JsonObject.width - s3;
+    const w2 = Math.sqrt(Math.pow(JsonObject.width, 2) + Math.pow(s1, 2));
+    const w3 = Math.sqrt(Math.pow(JsonObject.height, 2) + Math.pow(s3, 2));
+    const sticka = stickover(JsonObject.angles.a, JsonObject.board);
+    const stickb = stickover(JsonObject.angles.b, JsonObject.board);
     
     // Shift Arithmetic
-    width = size[0] + shifts.width;
-    step1 = s1 + shifts.s1;
-    hypotenuse2 = w2 + shifts.h2;
-    step2 = s2 + shifts.s2;
-    stepx = sx + shifts.sx;
-    hypotenuse3 = w3 + shifts.h3;
-    step3 = s3 + shifts.s3;
-    stepsq = size[1] + shifts.sq;
-    
-    
-    // Checkbox Arithmetic
-    if (NS.checked) {
-      shiftw -= 6.5; 
-      shiftw2 -= 3;
-      shiftw3 -= 3;
-    }
-    if (NSL.checked) {
-      shiftw -= 3.25; 
-    }
-    if (NSR.checked) {
-      shiftw -= 3.25;
-      shiftw2 -= 3; 
-    }
-    if (NSB.checked) {
-      shiftw3 -= 3; 
-    }
+    width = JsonObject.width + JsonObject.stick + JsonObject.shifts.post;
+    step1 = s1 - JsonObject.board + sticka + JsonObject.shifts.s1;
+    hypotenuse2 = w2 + JsonObject.shifts.h2;
+    step2 = s2 - JsonObject.shifts.s2;
+    stepx = sx + stickb + JsonObject.shifts.sx;
+    hypotenuse3 = w3 + JsonObject.shifts.h3;
+    step3 = s3 - stickb + JsonObject.shifts.s3 + JsonObject.shifts.post - JsonObject.board;
+    stepsq = JsonObject.height + JsonObject.stick;
+    stick = JsonObject.stick;
+
+    //checkbox function
+    ({ width, hypotenuse2, hypotenuse3, stepsq } = checkbox(width, hypotenuse2, hypotenuse3, stepsq, JsonObject.checkboxes, stick));
+
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
   
@@ -488,7 +595,6 @@
       s3: step3,
       sq: stepsq
     };
-    //console.log(resultobj);
     
     function displayResults(resultobj) {
       let result = '';

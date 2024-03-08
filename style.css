@@ -134,7 +134,7 @@ boxlabel {
   background-color: #4b514b;
 }
 
-.link {
+.link .link:visited {
   color: black; /* Change this to the color you want */
   text-decoration: none; /* Removes the underline */
 }
