@@ -1,6 +1,6 @@
 {
   "setup": {
-    "version": "1.4.3",
+    "version": "1.4.4",
     "stick": 3.25,
     "hangar": 0.5,
     "board": 1.5,
@@ -10,7 +10,9 @@
     },
     "3step": {
       "hypotenuseshift": 0.25
-    }
+    },
+    "minus": 0.03125,
+    "minushair": 0.015625
   },
   "winders": {
     "2StepHanger": {
@@ -39,26 +41,6 @@
         "b": 31
       },
       "nosingangles": {
-        "a": 29,
-        "b": 31
-      },
-      "shifts": {
-        "width": 7,
-        "s1": 2.5,
-        "h2": 3.5,
-        "s2": -0.5,
-        "sx": 2.5,
-        "h3": 3.5,
-        "s3": -0.5
-      }
-    },
-    "3StepHangerStrict": {
-      "is2Step": false,
-      "angles": {
-        "a": 29,
-        "b": 31
-      },
-      "nosingangles": {
         "a": 30,
         "b": 30
       },
@@ -66,7 +48,7 @@
         "s1": 0.5,
         "h2": 3.75,
         "s2": 0.5,
-        "sx": 0.5,
+        "sx": 1,
         "h3": 3.75,
         "s3": 0.5
       }
@@ -116,7 +98,7 @@
     "3StepDOTStrict": {
       "is2Step": false,
       "angles": {
-        "a": 28,
+        "a": 27.984375,
         "b": 32
       },
       "nosingangles": {
