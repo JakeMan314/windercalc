@@ -198,13 +198,13 @@
       calculate2StepDOT(size, checkboxes, options, angles, shifts);
       break;
       case '3StepDOT':
-      calculate3StepDOT(size, checkboxes, options, angles, shifts);
+      calculate3StepDOT(JsonObject);
       break;
       case '2Step3_5Post':
       calculate2Step3_5Post(size, checkboxes, options, angles, shifts);
       break;
       case '3Step3_5Post':
-      calculate3Step3_5Post(size, checkboxes, options, angles, shifts);
+      calculate3Step3_5Post(JsonObject);
       break;
       case '2Step5_5Post':
       calculate2Step5_5Post(size, checkboxes, options, angles, shifts);
@@ -217,9 +217,6 @@
       break;
       case '3StepWrap':
       calculate3StepWrap(size, checkboxes, options, angles, shifts);
-      break;
-      case '3StepDOTStrict':
-      calculate3StepDOTStrict(JsonObject);
       break;
       default:
       console.error(`Unsupported winder type: ${winderType}`);
@@ -337,49 +334,7 @@
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
   
-  function calculate3StepDOT(size, checkboxes, options, angles, shifts) {
-    
-    // Core Math Calculations
-    const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
-    const s3 = size[1] * Math.tan(angles[1] * (Math.PI / 180)); 
-    const s2 = size[1] - s1;
-    const sx = size[0] - s3;
-    const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
-    const w3 = Math.sqrt(Math.pow(size[1], 2) + Math.pow(s3, 2));
-    
-    // Shift Arithmetic
-    width = size[0] + shifts.width;
-    step1 = s1 + shifts.s1;
-    hypotenuse2 = w2 + shifts.h2;
-    step2 = s2 + shifts.s2;
-    stepx = sx + shifts.sx;
-    hypotenuse3 = w3 + shifts.h3;
-    step3 = s3 + shifts.s3;
-    stepsq = size[1] + shifts.sq;
-    
-    
-    // Checkbox Arithmetic
-    if (NS.checked) {
-      width -= 3.25; 
-      hypotenuse2 -= 2;
-      hypotenuse3 -= 2;
-      stepsq -= 3.25;
-    }
-    if (NSL.checked) {
-      width -= 3.25; 
-    }
-    if (NSR.checked) {
-      width -= 3.25;
-      hypotenuse2 -= 2; 
-    }
-    if (NSB.checked) {
-      hypotenuse3 -= 2; 
-      stepsq -= 3.25;
-    }
-    createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
-  }
-
-  function calculate3StepDOTStrict(JsonObject) {
+  function calculate3StepDOT(JsonObject) {
     
     // Core Math Calculations
     // Need to calculate Inside/Post Triangle to figure exact values
@@ -393,7 +348,7 @@
     // const insidehypotenuse = Math.sqrt(Math.pow(insidewidth, 2) + Math.pow(up, 2));
     // console.log(insidehypotenuse);
     // All correct, now to add/subtract to the outside triangle
-
+    console.log("strict");
     const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180));
     const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
     const s2 = JsonObject.height - s1;
@@ -404,14 +359,14 @@
     const stickb = stickover(JsonObject.angles.b, JsonObject.board);
     
     // Shift Arithmetic
-    width = JsonObject.width + (JsonObject.stick * 2) + JsonObject.shifts.post;
-    step1 = s1 + offseta - JsonObject.board + sticka; + JsonObject.shifts.post + JsonObject.shifts.s1;
-    hypotenuse2 = w2 + JsonObject.shifts.h2;
-    step2 = s2 + JsonObject.post - JsonObject.shifts.s2;
-    stepx = sx - JsonObject.board + stickb + JsonObject.shifts.sx;
-    hypotenuse3 = w3 + JsonObject.shifts.h3; //how is offset affecting this?
-    step3 = s3 - stickb + JsonObject.shifts.s3; //how is offset affecting this?
-    stepsq = JsonObject.height + JsonObject.board + JsonObject.stick - JsonObject.board;
+    width = JsonObject.width + JsonObject.stick + JsonObject.shifts.post; //done
+    step1 = s1  + offseta - JsonObject.board + sticka; + JsonObject.shifts.post + JsonObject.shifts.s1; //done
+    hypotenuse2 = w2 + JsonObject.shifts.h2; //done?
+    step2 = s2 - offsetb + JsonObject.shifts.post - JsonObject.shifts.s2; //done
+    stepx = sx - JsonObject.board + stickb + JsonObject.shifts.sx; //done
+    hypotenuse3 = w3 + JsonObject.shifts.h3; //done (but offset confusing me, need to check)
+    step3 = s3 - stickb + JsonObject.shifts.post - JsonObject.board + JsonObject.shifts.s3; //done
+    stepsq = JsonObject.height + JsonObject.shifts.post + JsonObject.stick - JsonObject.board; //done
     stick = JsonObject.stick;
 
     //checkbox function
@@ -421,45 +376,45 @@
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
   
-  function calculate3Step3_5Post(size, checkboxes, options, angles, shifts) {
-    
+  function calculate3Step3_5Post(JsonObject) {
+      
     // Core Math Calculations
-    const s1 = size[0] * Math.tan(angles[0] * (Math.PI / 180));
-    const s3 = size[1] * Math.tan(angles[1] * (Math.PI / 180)); 
-    const s2 = size[1] - s1;
-    const sx = size[0] - s3;
-    const w2 = Math.sqrt(Math.pow(size[0], 2) + Math.pow(s1, 2));
-    const w3 = Math.sqrt(Math.pow(size[1], 2) + Math.pow(s3, 2));
+    // Need to calculate Inside/Post Triangle to figure exact values
+    // post really affects 2 and 3, that first triangle is always exact based on angles
+
+    // Inside Triangle Setup Calculations
+    const offseta = Math.cos(JsonObject.angles.a * (Math.PI / 180)) * JsonObject.nosingwidth; //distance from nosing to top of board vert
+    const offsetb = Math.cos(JsonObject.angles.a * (Math.PI / 180)) * JsonObject.nosingwidth; //distance from nosing to top of board vert
+    // const insidewidth = up / Math.tan(JsonObject.angles.a * (Math.PI / 180));
+    // console.log(insidewidth);
+    // const insidehypotenuse = Math.sqrt(Math.pow(insidewidth, 2) + Math.pow(up, 2));
+    // console.log(insidehypotenuse);
+    // All correct, now to add/subtract to the outside triangle
+    console.log("strict");
+    const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180));
+    const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
+    const s2 = JsonObject.height - s1;
+    const sx = JsonObject.width - s3;
+    const w2 = Math.sqrt(Math.pow(JsonObject.width, 2) + Math.pow(s1, 2));
+    const w3 = Math.sqrt(Math.pow(JsonObject.height, 2) + Math.pow(s3, 2));
+    const sticka = stickover(JsonObject.angles.a, JsonObject.board);
+    const stickb = stickover(JsonObject.angles.b, JsonObject.board);
     
     // Shift Arithmetic
-    width = size[0] + shifts.width;
-    step1 = s1 + shifts.s1;
-    hypotenuse2 = w2 + shifts.h2;
-    step2 = s2 + shifts.s2;
-    stepx = sx + shifts.sx;
-    hypotenuse3 = w3 + shifts.h3;
-    step3 = s3 + shifts.s3;
-    stepsq = size[1] + shifts.sq;
+    width = JsonObject.width + JsonObject.stick + JsonObject.shifts.post; //done
+    step1 = s1  + offseta - JsonObject.board + sticka; + JsonObject.shifts.post + JsonObject.shifts.s1; //done
+    hypotenuse2 = w2 + JsonObject.shifts.h2; //done?
+    step2 = s2 - offsetb + JsonObject.shifts.post - JsonObject.shifts.s2; //done
+    stepx = sx - JsonObject.board + stickb + JsonObject.shifts.sx; //done
+    hypotenuse3 = w3 + JsonObject.shifts.h3; //done (but offset confusing me, need to check)
+    step3 = s3 - stickb + JsonObject.shifts.post - JsonObject.board + JsonObject.shifts.s3; //done
+    stepsq = JsonObject.height + JsonObject.shifts.post + JsonObject.stick - JsonObject.board; //done
+    stick = JsonObject.stick;
+
+    //checkbox function
+    ({ width, hypotenuse2, hypotenuse3, stepsq } = checkbox(width, hypotenuse2, hypotenuse3, stepsq, JsonObject.checkboxes, stick));
+
     
-    
-    // Checkbox Arithmetic
-    if (NS.checked) {
-      width -= 3.25; 
-      hypotenuse2 -= 3;
-      hypotenuse3 -= 3;
-      stepsq -= 3.25;
-    }
-    if (NSL.checked) {
-      width -= 3.25; 
-    }
-    if (NSR.checked) {
-      width -= 3.25;
-      hypotenuse2 -= 3; 
-    }
-    if (NSB.checked) {
-      hypotenuse3 -= 3; 
-      stepsq -= 3.25;
-    }
     createResult(width, step1, hypotenuse2, step2, stepx, hypotenuse3, step3, stepsq);
   }
   
