@@ -13,8 +13,8 @@
     <div class="inputs">
       <select id="winderType" onchange="calculate()">
         <option value="3StepHanger">3 Step Hanger</option>
-        <option value="3StepDOT">3 Step DOT</option>
-        <option value="3Step3_5Post">3 Step 3.5 Post</option>
+        <option value="3StepDOT">3 Step DOT (Beta)</option>
+        <option value="3Step3_5Post">3 Step 3.5 Post (Beta)</option>
         <option value="3Step5_5Post">3 Step 5.5 Post</option>
         <!--    
         Hiding these options for now, as they are not finished yet
@@ -23,7 +23,6 @@
         <option value="2StepDOT">2 Step DOT (In Progress)</option>
         <option value="3StepDOT">3 Step DOT</option>
         <option value="2Step3_5Post">2 Step 3.5 Post (In Progress)</option>
-        
         <option value="2Step5_5Post">2 Step 5.5 Post (In Progress)</option>
         <option value="3Step5_5Post">3 Step 5.5 Post</option>
         <option value="2StepWrap">2 Step Wraparound (In Progress)</option>
@@ -103,16 +102,24 @@
         </div>
         <button onclick="calculate()">Calculate</button>
         <button id="clear" onclick="clearing()">Clear</button>
-        <footer id="myFooter">
+      </div>
+      <div class="outputs">
+        <div id="result">
+        </div>
+        <!-- <div class="bottom">
+          <input type="checkbox" id="nosingCheckbox" onchange="calculate()">
+          <label class="nosing-label" for="nosingCheckbox">
+            Nosing
+          </label>
+        </div> 
+      -->
+      </div>
+    </div>
+            <footer id="myFooter">
           <div id="credits">Developed by
           <a href="https://github.com/JakeMan314/windercalc" class="link">Jake Klassen</a></div>
           <div id="version">Version</div>
         </footer>
-      </div>
-      <div class="outputs" id="result">
-      </div>
-    </div>
-    
   </div>
   <script src="script.js"></script>
 </body>

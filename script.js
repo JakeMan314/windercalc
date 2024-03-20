@@ -390,7 +390,6 @@
     // const insidehypotenuse = Math.sqrt(Math.pow(insidewidth, 2) + Math.pow(up, 2));
     // console.log(insidehypotenuse);
     // All correct, now to add/subtract to the outside triangle
-    console.log("strict");
     const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180));
     const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
     const s2 = JsonObject.height - s1;
@@ -400,9 +399,10 @@
     const sticka = stickover(JsonObject.angles.a, JsonObject.board);
     const stickb = stickover(JsonObject.angles.b, JsonObject.board);
     
+    
     // Shift Arithmetic
     width = JsonObject.width + JsonObject.stick + JsonObject.shifts.post; //done
-    step1 = s1  + offseta - JsonObject.board + sticka; + JsonObject.shifts.post + JsonObject.shifts.s1; //done
+    step1 = s1 + offseta - JsonObject.board + sticka + JsonObject.shifts.post + JsonObject.shifts.s1; //done
     hypotenuse2 = w2 + JsonObject.shifts.h2; //done?
     step2 = s2 - offsetb + JsonObject.shifts.post - JsonObject.shifts.s2; //done
     stepx = sx - JsonObject.board + stickb + JsonObject.shifts.sx; //done
