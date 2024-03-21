@@ -135,15 +135,16 @@
     }
     
     //grab angles if nosing true
-    //const a = jsonData[winderType].angles.a
-    let a;
-    let b;
     if (nosing) {
-      a = jsonData.winders[winderType].nosingangles.a
-      b = jsonData.winders[winderType].nosingangles.b
+      var AngleObject = {
+      "a": jsonData.winders[winderType].nosingangles.a,
+      "b": jsonData.winders[winderType].nosingangles.b
+    };
     } else {
-      a = jsonData.winders[winderType].angles.a
-      b = jsonData.winders[winderType].angles.b
+      var AngleObject = {
+      "a": jsonData.winders[winderType].angles.a,
+      "b": jsonData.winders[winderType].angles.b
+    };
     }
 
     //new json setup for arguments all in one object
@@ -162,31 +163,11 @@
       "stick": jsonData.setup.stick,
       "hangar": jsonData.setup.hangar,
       "board": jsonData.setup.board,
-      "angles": jsonData.winders[winderType].angles,
+      "angles": AngleObject,
       "shifts": jsonData.winders[winderType].shifts
   };
 
-    const stick = jsonData.setup.stick;
-    const hangar = jsonData.setup.hangar;
-    const board = jsonData.setup.board;
-    //OLD array setup for arguments
-    const size = [width, height];
-    const checkboxes = [NS, NSL, NSR, NSB];
-    const options = [winderType, nosing, stick, hangar, board]; //always can add more options
-    const angles = [a, b];
-    const shifts = jsonData.winders[winderType].shifts; //in future consider converting all to var or json
-    
-    // Define a JavaScript object with date-value pairs
-    // Initialize an empty array to store the result
-    var result = [];
-
-    // Iterate over each property in the json_data object
-    for (var i in shifts) {
-        // Push an array containing the date (property) and its corresponding value into the 'result' array
-        result.push(shifts[i]);
-    }
-
-    
+   
     switch(winderType) {
       case '2StepHanger':
       calculate2StepHanger(size, checkboxes, options, angles, shifts);
@@ -337,18 +318,9 @@
   function calculate3StepDOT(JsonObject) {
     
     // Core Math Calculations
-    // Need to calculate Inside/Post Triangle to figure exact values
-    // post really affects 2 and 3, that first triangle is always exact based on angles
-
     // Inside Triangle Setup Calculations
     const offseta = Math.cos(JsonObject.angles.a * (Math.PI / 180)) * JsonObject.nosingwidth; //distance from nosing to top of board vert
     const offsetb = Math.cos(JsonObject.angles.a * (Math.PI / 180)) * JsonObject.nosingwidth; //distance from nosing to top of board vert
-    // const insidewidth = up / Math.tan(JsonObject.angles.a * (Math.PI / 180));
-    // console.log(insidewidth);
-    // const insidehypotenuse = Math.sqrt(Math.pow(insidewidth, 2) + Math.pow(up, 2));
-    // console.log(insidehypotenuse);
-    // All correct, now to add/subtract to the outside triangle
-    console.log("strict");
     const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180));
     const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
     const s2 = JsonObject.height - s1;
@@ -379,17 +351,9 @@
   function calculate3Step3_5Post(JsonObject) {
       
     // Core Math Calculations
-    // Need to calculate Inside/Post Triangle to figure exact values
-    // post really affects 2 and 3, that first triangle is always exact based on angles
-
     // Inside Triangle Setup Calculations
     const offseta = Math.cos(JsonObject.angles.a * (Math.PI / 180)) * JsonObject.nosingwidth; //distance from nosing to top of board vert
     const offsetb = Math.cos(JsonObject.angles.a * (Math.PI / 180)) * JsonObject.nosingwidth; //distance from nosing to top of board vert
-    // const insidewidth = up / Math.tan(JsonObject.angles.a * (Math.PI / 180));
-    // console.log(insidewidth);
-    // const insidehypotenuse = Math.sqrt(Math.pow(insidewidth, 2) + Math.pow(up, 2));
-    // console.log(insidehypotenuse);
-    // All correct, now to add/subtract to the outside triangle
     const s1 = JsonObject.width * Math.tan(JsonObject.angles.a * (Math.PI / 180));
     const s3 = JsonObject.height * Math.tan(JsonObject.angles.b * (Math.PI / 180)); 
     const s2 = JsonObject.height - s1;
@@ -398,8 +362,7 @@
     const w3 = Math.sqrt(Math.pow(JsonObject.height, 2) + Math.pow(s3, 2));
     const sticka = stickover(JsonObject.angles.a, JsonObject.board);
     const stickb = stickover(JsonObject.angles.b, JsonObject.board);
-    
-    
+
     // Shift Arithmetic
     width = JsonObject.width + JsonObject.stick + JsonObject.shifts.post; //done
     step1 = s1 + offseta - JsonObject.board + sticka + JsonObject.shifts.post + JsonObject.shifts.s1; //done
@@ -494,7 +457,6 @@
     function toFraction(decimal) {
       const whole = Math.floor(decimal);
       const fraction = decimal - whole;
-      
       if (fraction === 0) {
         return `${whole}`;
       }

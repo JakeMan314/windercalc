@@ -1,6 +1,6 @@
 {
   "setup": {
-    "version": "1.4.5",
+    "version": "1.4.6",
     "stick": 3.25,
     "hangar": 0.5,
     "board": 1.5,
@@ -81,8 +81,8 @@
         "b": 32
       },
       "nosingangles": {
-        "a": 27.984375,
-        "b": 32
+        "a": 29,
+        "b": 31.03125
       },
       "shifts": {
         "post": 3.5,
@@ -118,7 +118,7 @@
       "is2Step": false,
       "angles": {
         "a": 31,
-        "b": 26
+        "b": 26.03125
       },
       "nosingangles": {
         "a": 32,
